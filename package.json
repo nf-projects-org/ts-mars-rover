@@ -1,0 +1,25 @@
+{
+  "name": "ts-mars-rover",
+  "version": "1.0.0",
+  "description": "``` markdown # Mars Rover Challenge  Tech Task: Program to move Rovers around the surface of Mars",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com.nigel.faria:nigelfaria/ts-mars-rover.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.2.5",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.9.4"
+  }
+}
