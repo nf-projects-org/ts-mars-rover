@@ -16,4 +16,12 @@ export class MarsRover extends Vehicle {
     calculatePath() {
         return true;
     }
+
+    captureImage(){
+        if (this.instruments!=null){
+
+        }
+        return false;
+    }
+
 }

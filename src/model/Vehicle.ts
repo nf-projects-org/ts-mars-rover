@@ -19,10 +19,16 @@ export class Vehicle {
     }
 
     move() {
+        if (this.id) { }
+        if (this.map) { }
+        if (this.currentPosition) { }
+        if (this.heading) { }
+        if (this.vehicles) { }
         return "";
     }
 
     turn(direction: Direction) {
+        if (direction) { }
         return "";
     }
 

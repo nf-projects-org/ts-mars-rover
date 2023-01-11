@@ -12,6 +12,6 @@ export class RectangularMap extends PlanetaryMap {
     }
 
     isPositionInMap(position: Position): boolean {
-        return true;
+        return position.getX() <= this.width && position.getY() <= this.height;
     }
 }

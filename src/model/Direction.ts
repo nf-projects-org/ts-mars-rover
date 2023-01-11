@@ -4,4 +4,8 @@ export class Direction {
     constructor(direction: String) {
         this.direction = direction;
     }
+
+    getDirection(){
+        return this.direction;
+    }
 }
