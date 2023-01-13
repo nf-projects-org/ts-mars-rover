@@ -1,5 +1,4 @@
 import { InputParser } from "./InputParser";
-import { Command } from "../model/Command";
 import { PlanetaryMap } from "../model/PlanetaryMap";
 import { Position } from "../model/Position";
 import { CompassHeading } from "../model/Compassheading";
@@ -14,7 +13,9 @@ export class MarsStateController {
     }
 
     start(){
-        let commands = this.inputParser.getCommands();
+        console.log(2);
+        this.inputParser.getCommands();
+        console.log(10);
     }
 
     // private getCommand(): Command {

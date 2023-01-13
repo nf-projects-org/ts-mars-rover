@@ -13,8 +13,10 @@ if (typeof window !== 'undefined') {
 
 
 export function start(){
+  console.log(1);
   let marsStateController = new MarsStateController(inputParser);
   marsStateController.start();
+  console.log(11);
 }
 
 start();
