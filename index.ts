@@ -8,15 +8,13 @@ let inputParser:InputParser;
 if (typeof window !== 'undefined') {
     inputParser = new BrowserInputParser();
   } else {
-    inputParser = new NodeInputParser(); 
+   inputParser = new NodeInputParser(); 
 }
 
 
 export function start(){
-  console.log(1);
   let marsStateController = new MarsStateController(inputParser);
   marsStateController.start();
-  console.log(11);
 }
 
 start();
