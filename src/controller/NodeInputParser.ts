@@ -1,23 +1,46 @@
-import * as readline from 'node:readline';
 import { InputParser } from './InputParser';
+import * as readline from 'node:readline';
 import { Command } from '../model/Command';
-
 export class NodeInputParser extends InputParser{
 
     private static prompt = "Enter Input and type #EOF# on a new line to finish";
-    private static endInput = "#EOF#";
+    // private static endInput = "#EOF#";
 
     private buffer:string[] = [];
 
     private reader = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
-    });
+    });;
+
+    private askQuestion(question: string, callback: (arg: string) => void) {
+        this.reader.question(`${question}`, callback);
+        console.log("after Question");
+    }
 
     private getUserInput(){
-        console.log(4);
-        return this.getInputFromTerminal().then( data => data);
+        console.log(NodeInputParser.prompt);
+        this.askQuestion("", input => {
+            this.buffer.push(input);
+        });
+        return this.buffer;
     }
+
+    // private getInputFromTerminal(){
+    //     console.log(NodeInputParser.prompt);
+
+    //     let input = this.reader.prompt();
+    //     console.log(input);
+    //     while (input !== NodeInputParser.endInput){
+    //         this.buffer.push(input);
+    //         console.log(6);
+    //         console.log(this.buffer);
+    //         input = this.reader.prompt();
+    //     }
+    //     console.log(7);
+    //     console.log(this.buffer);
+    //     return this.buffer;
+    // }
 
 
     // private getInputFromTerminal(){
@@ -34,34 +57,34 @@ export class NodeInputParser extends InputParser{
     //     })
     // }
 
-    private async getInputFromTerminal(){
-        console.log(5);
-        console.log(NodeInputParser.prompt);
-        let input = await this.readInput();
-        while(input !== NodeInputParser.endInput){
-            console.log(6);
-            this.buffer.push(input);
-            input = await this.readInput();
-        }
-        console.log(7);
-        this.reader.close();
-        console.log("Input End");
-        console.log(8);
-        return this.buffer;
-    }
+    // private getInputFromTerminal(){
+    //     console.log(5);
+    //     console.log(NodeInputParser.prompt);
+    //     let promise = this.readInput();
+    //     while(input !== NodeInputParser.endInput){
+    //         console.log(6);
+    //         this.buffer.push(input);
+    //         input = await this.readInput();
+    //     }
+    //     console.log(7);
+    //     this.reader.close();
+    //     console.log("Input End");
+    //     console.log(8);
+    //     return this.buffer;
+    // }
 
-    private async readInput(){
-        return new Promise<string>((resolve)=>{
-            this.reader.question('',(input)=> {
-                console.log("X");
-                resolve(input);
-            });
-        });
-    }
+    // private readInput(){
+    //     return new Promise<string>((resolve)=>{
+    //         this.reader.question('',(input)=> {
+    //             console.log("X");
+    //             resolve(input);
+    //         });
+    //     });
+    // }
 
     getCommands(){
-        console.log(3);
-        let commands:Command[] = this.getUserInput().map( line => Command.parseCommand(line));
+        let input = this.getUserInput();
+        let commands:Command[] = input.map( line => Command.parseCommand(line));
         console.log(commands);
         console.log(9);
         return commands;

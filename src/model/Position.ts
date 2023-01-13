@@ -13,4 +13,11 @@ export class Position {
     getY() {
         return this.y;
     }
+
+    static createPosition(arr:string[]){
+        if(arr.length!= 2){
+            return new Position(-1,-1);
+        }
+        return new Position(parseInt(arr[0]), parseInt(arr[1]));
+    }
 }

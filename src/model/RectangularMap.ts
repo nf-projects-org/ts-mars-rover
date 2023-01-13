@@ -11,7 +11,17 @@ export class RectangularMap extends PlanetaryMap {
         this.width = width;
     }
 
-    isPositionInMap(position: Position): boolean {
-        return position.getX() <= this.width && position.getY() <= this.height;
+    static createMap(x:number, y: number){
+        return new RectangularMap(x,y);
     }
+    
+    static createMapFromString(x:string, y:string){
+        return this.createMap(parseInt(x), parseInt(y));
+    }
+
+
+    isPositionInMap(position: Position): boolean {
+        return position.getX() >= 0 && position.getX() <= this.width && position.getY() >= 0 && position.getY() <= this.height;
+    }
+
 }
