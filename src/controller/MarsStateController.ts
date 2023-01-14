@@ -1,16 +1,14 @@
 import { InputParser } from "./InputParser";
 import { PlanetMap, RectangularMap, Position, CompassHeading } from "../model/PlanetMapNavigation";
 import { Instrument } from "../model/Instrument";
-import { MarsRover } from "../model/MarsRover";
 import { Command } from "../model/Command";
-import { Vehicle } from "../model/Vehicle";
+import { Vehicle, MarsRover } from "../model/Vehicle";
 
 export class MarsStateController {
     static CREATEMAP = Command.commandTypes[0];
     static CREATEROVER = Command.commandTypes[1];
-    static MOVE = Command.commandTypes[2];
-    static TURN = Command.commandTypes[3];
-    static UNKNOWN = Command.commandTypes[4];
+    static MOVETURN = Command.commandTypes[2];
+    static UNKNOWN = Command.commandTypes[3];
 
     private inputParser:InputParser;
     private planetMap:PlanetMap;

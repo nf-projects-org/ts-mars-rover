@@ -1,5 +1,7 @@
-import { PlanetMap, Position, CompassHeading } from "./PlanetMapNavigation";
-import { Direction } from "./Direction";
+import { PlanetMap, Position, CompassHeading, Direction } from "./PlanetMapNavigation";
+import { Instrument } from "./Instrument";
+import * as uuid from 'uuid';
+
 
 export class Vehicle {
     private readonly id: String;
@@ -14,6 +16,10 @@ export class Vehicle {
         this.currentPosition = currentPosition;
         this.heading = heading;
         this.vehicles = vehicles;
+    }
+
+    toString(){
+        return `${this.id} - ${this.currentPosition} - ${this.heading}`;
     }
 
     move() {
@@ -37,4 +43,31 @@ export class Vehicle {
     getOtherVehiclePositions() {
 
     }
+}
+
+
+export class MarsRover extends Vehicle {
+    private readonly instruments: Instrument[];
+
+    constructor(id: String, map: PlanetMap, currentPosition: Position, heading: CompassHeading, vehicles: Position[], instruments: Instrument[]) {
+        super(id, map, currentPosition, heading, vehicles);
+        this.instruments = instruments;
+    }
+
+    static createRover(map: PlanetMap, currentPosition: Position, heading: CompassHeading, vehicles: Position[], instruments: Instrument[]) {
+        const id = uuid.v4();
+        return new MarsRover(id, map, currentPosition, heading, vehicles, instruments);
+    }
+
+    calculatePath() {
+        return true;
+    }
+
+    captureImage(){
+        if (this.instruments!=null){
+
+        }
+        return false;
+    }
+
 }

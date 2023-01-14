@@ -14,6 +14,10 @@ export class RectangularMap extends PlanetMap {
         this.width = width;
     }
 
+    toString(){
+        return `RectangularMap: ${this.width}, ${this.height}`;
+    }
+
     static createMap(x:number, y: number){
         return new RectangularMap(x,y);
     }
@@ -36,6 +40,10 @@ export class Position {
     constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
+    }
+
+    toString(){
+        return `Position: ${this.x}, ${this.y}`;
     }
 
     getX() {
@@ -68,4 +76,16 @@ export class CompassHeading {
         return new CompassHeading(heading);
     }
 
+}
+
+export class Direction {
+    private readonly direction: String;
+
+    constructor(direction: String) {
+        this.direction = direction;
+    }
+
+    getDirection(){
+        return this.direction;
+    }
 }
