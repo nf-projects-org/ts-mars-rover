@@ -2,19 +2,21 @@ import * as fs from 'fs';
 import { Command } from "../model/Command";
 
 export abstract class InputParser {
-
     abstract getCommands(): Command[];
-
 }
 
+export class FileInputParser extends InputParser {
 
-export class FileInputParser extends InputParser{
+    file: string;
 
-    static file = './Input.txt'; 
+    constructor(file = './Input.txt') {
+        super();
+        this.file = file;
+    }
 
-    private readInput(){
+    private readInput() {
         try {
-            const data = fs.readFileSync(FileInputParser.file, 'utf8');
+            const data = fs.readFileSync(this.file, 'utf8');
             return data;
         } catch (err) {
             console.error(err);
@@ -22,11 +24,14 @@ export class FileInputParser extends InputParser{
         }
     }
 
+    /**
+     * 
+     * @returns Array of Commands parsed from the Input
+     */
     getCommands(): Command[] {
         let input = this.readInput();
         console.log(input);
-        let lines = input.split("\n").filter( line => line !== '');
-        console.log(lines);
+        let lines = input.split("\n").filter(line => line !== '');
         return Command.createCommands(lines);
     }
 
@@ -39,7 +44,7 @@ export class FileInputParser extends InputParser{
 //     // private static endInput = "#EOF#";
 
 //     private buffer:string[] = [];
-    
+
 //     getInput(){
 //     }
 
@@ -50,7 +55,7 @@ export class FileInputParser extends InputParser{
 
 export class BrowserInputParser {
 
-    getCommands(){
-        return [ Command.parseCommand("")];
+    getCommands() {
+        return [Command.parseCommand("")];
     }
 }
