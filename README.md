@@ -13,15 +13,15 @@ Tech Task: Program to move Rovers around the surface of Mars
 - [Contributing](#contributing)
 
 ## About
-TODO Write about 1-2 paragraphs describing the purpose of your project.
+Implementation of the tech task
 
 ## Getting Started
-TODO These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+Clone the repository
 
 ## Installing
-TODO Installation instructions.
+npm init -y
 
 ## Usage
-TODO A step by step series of examples that tell you how to get a development env running.
+Edit the Input.txt file 
 
 ```
