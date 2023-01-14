@@ -22,6 +22,7 @@ Clone the repository
 npm init -y
 
 ## Usage
-Edit the Input.txt file 
+Edit the Input.txt file and execute npm run start
+Alternatively edit the tests in MarsRover.test.ts
 
 ```
