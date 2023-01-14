@@ -31,7 +31,7 @@ export class MarsStateController {
             let moveTurnRoverCommands = Command.getMoveTurnRoverCommands(commands);
             moveTurnRoverCommands.forEach((command, index) => this.executeRoverCommand(command, index));
         }
-        console.log(this.getState());
+        this.vehicles.forEach(vehicle => console.log(vehicle.toString()))
     }
 
     getState() {

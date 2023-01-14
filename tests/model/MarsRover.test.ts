@@ -13,8 +13,10 @@ describe("MarsRover Functionality", () => {
         let rover = MarsRover.createRover(map, position, heading, [], []);
         let command = new Command(Command.commandTypes[2], "MMM".split(""));
         expect(rover.moveOrTurn(command)).toBe(true);
+        rover = MarsRover.createRover(map, position, heading, [], []);
         command = new Command(Command.commandTypes[2], "MMMMMM".split(""));
         expect(rover.moveOrTurn(command)).toBe(false);
+        rover = MarsRover.createRover(map, position, heading, [], []);
         command = new Command(Command.commandTypes[2], "LMLMLMLMM".split(""));
         expect(rover.moveOrTurn(command)).toBe(true);
     });
@@ -31,7 +33,7 @@ describe("MarsRover Functionality", () => {
         expect(rover.getCurrentPosition()).toStrictEqual(new Position(1, 2));
         rover.setCurrentHeading(new CompassHeading("E"));
         rover.move(false);
-        expect(rover.getCurrentPosition()).toStrictEqual(new Position(0, 2));
+        expect(rover.getCurrentPosition()).toStrictEqual(new Position(2, 2));
         rover.setCurrentHeading(new CompassHeading("W"));
         rover.move(false);
         expect(rover.getCurrentPosition()).toStrictEqual(new Position(1, 2));
@@ -44,20 +46,20 @@ describe("MarsRover Functionality", () => {
         let rover = MarsRover.createRover(map, position, heading, [], []);
 
         rover.turn(false, "L");
-        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("E"));
+        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("W"));
         rover.turn(false, "L");
         expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("S"));
         rover.turn(false, "L");
-        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("W"));
+        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("E"));
         rover.turn(false, "L");
         expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("N"));
 
         rover.turn(false, "R");
-        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("W"));
+        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("E"));
         rover.turn(false, "R");
         expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("S"));
         rover.turn(false, "R");
-        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("E"));
+        expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("W"));
         rover.turn(false, "R");
         expect(rover.getCurrentHeading()).toStrictEqual(new CompassHeading("N"));
 
