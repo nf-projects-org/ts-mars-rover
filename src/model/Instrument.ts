@@ -26,7 +26,7 @@ export class RobotArm extends Instrument {
     }
 
     move(x: number, y: number, z: number) {
-        if (x + y + z){}
+        if (x + y + z) { }
         return true;
     }
 }
