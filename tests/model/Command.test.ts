@@ -4,8 +4,13 @@ describe("Command Functionality", () => {
 
     test("createCommands" ,()=>{
         expect(Command.createCommands([])).toStrictEqual([]);
-        expect(Command.createCommands([""])).toStrictEqual([new Command(Command.commandTypes[4],[""])]);
-        expect(Command.createCommands(["5 5"])).toStrictEqual([new Command(Command.commandTypes[0],["5","5"])]);
+        expect(Command.createCommands([""])).toStrictEqual([]);
+        expect(Command.createCommands(["1 1 N"])).toStrictEqual([]);
+        expect(Command.createCommands(["5 5"])).toStrictEqual([]);
+        expect(Command.createCommands(["5 5","1 1 N"])).toStrictEqual([
+            new Command(Command.commandTypes[0],["5","5"]),
+            new Command(Command.commandTypes[1],["1","1","N"]),
+        ]);
     });
 
     test("parseCommand - createMap", () => {
