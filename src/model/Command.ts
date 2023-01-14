@@ -10,6 +10,7 @@ export class Command{
             return new Command(this.commandTypes[1],input.split(" "));
         }
         else {
+            console.log(input);
             return new Command(this.commandTypes[4],input.split(" "));
         }
     }
@@ -18,17 +19,21 @@ export class Command{
         let commands = input.map(commandString => this.parseCommand(commandString));
         if (Command.validateCommandList(commands)){
             return commands;
+        } else {
+            return [];
         }
-        return [];
     }
 
     static validateCommandList(commands:Command[]){
-        let filterCommandType = (type:string) => (command:Command) => command.getCommandType() === type;
-        let invalidCommands = commands.filter(filterCommandType(Command.commandTypes[4]));
-        let createMapCommands = commands.filter(filterCommandType(Command.commandTypes[0]));
-        let createRoverCommands = commands.filter(filterCommandType(Command.commandTypes[1]));
+        if (commands.length == 0){
+            return false;
+        }
+        let invalidCommands = this.getInvalidCommands(commands);
+        let createMapCommands = this.getCreateMapCommands(commands);
+        let createRoverCommands = this.getCreateRoverCommands(commands);
         if (invalidCommands.length > 0){
             console.log("Invalid commands found. Terminating");
+            console.log(invalidCommands);
             return false;
         }
 
@@ -47,6 +52,18 @@ export class Command{
         }
 
         return true;
+    }
+    static filterCommandType = (type:string) => (command:Command) => command.getCommandType() === type;
+
+    static getCreateRoverCommands(commands:Command[]){
+        return commands.filter(this.filterCommandType(Command.commandTypes[1]))
+    }
+    static getCreateMapCommands(commands:Command[]){
+        return commands.filter(this.filterCommandType(Command.commandTypes[0]));
+    }
+
+    static getInvalidCommands(commands:Command[]){
+        return commands.filter(this.filterCommandType(Command.commandTypes[4]))
     }
     
     private commandType:string;

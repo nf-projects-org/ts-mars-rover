@@ -1,6 +1,4 @@
-import { InputParser } from "./src/controller/InputParser";
-import {NodeInputParser} from "./src/controller/NodeInputParser"
-import {BrowserInputParser} from "./src/controller/BrowserInputParser"
+import { InputParser, FileInputParser, BrowserInputParser  } from "./src/controller/InputParser";
 import { MarsStateController } from "./src/controller/MarsStateController";
 
 let inputParser:InputParser;
@@ -8,7 +6,7 @@ let inputParser:InputParser;
 if (typeof window !== 'undefined') {
     inputParser = new BrowserInputParser();
   } else {
-   inputParser = new NodeInputParser(); 
+   inputParser = new FileInputParser(); 
 }
 
 

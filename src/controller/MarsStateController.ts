@@ -1,8 +1,5 @@
 import { InputParser } from "./InputParser";
-import { PlanetaryMap } from "../model/PlanetaryMap";
-import { RectangularMap } from "../model/RectangularMap";
-import { Position } from "../model/Position";
-import { CompassHeading } from "../model/Compassheading";
+import { PlanetMap, RectangularMap, Position, CompassHeading } from "../model/PlanetMapNavigation";
 import { Instrument } from "../model/Instrument";
 import { MarsRover } from "../model/MarsRover";
 import { Command } from "../model/Command";
@@ -16,17 +13,28 @@ export class MarsStateController {
     static UNKNOWN = Command.commandTypes[4];
 
     private inputParser:InputParser;
-    private planetMap:PlanetaryMap;
+    private planetMap:PlanetMap;
     private vehicles:Vehicle[];
 
     constructor(inputParser:InputParser){
         this.inputParser = inputParser;
+        this.vehicles = [];
     }
 
     start(){
         let commands = this.inputParser.getCommands();
-        //TODO get all command types and execute in the right order
+        console.log(commands);
+        if(commands.length > 0){
+            this.executeCommand(Command.getCreateMapCommands(commands)[0]);
+            Command.getCreateRoverCommands(commands).forEach(this.executeCommand);
+        }
+        console.log(this.getState());
 
+    }
+
+    getState(){
+        let output = `${this.planetMap}\n${this.vehicles}`
+        return output;
     }
 
     private executeCommand = (command:Command) => {
@@ -43,13 +51,6 @@ export class MarsStateController {
         }
     }
 
-    // private getCommand(): Command {
-    //     return new Command();
-    // }
-    // private sendCommand(command: Command): boolean {
-    //     if (command){}
-    //     return false;
-    // }
 
     
 
