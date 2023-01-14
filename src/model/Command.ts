@@ -1,17 +1,20 @@
 export class Command{
-    static commandTypes = ['CREATEMAP', 'CREATEROVER','MOVE', 'TURN', "UNKNOWN"] as const
+    static commandTypes = ['CREATEMAP', 'CREATEROVER','MOVETURN', "UNKNOWN"] as const
     static createMapRegex = /^\d+ \d+$/;
     static createRoverRegex = /^\d+ \d+ [NSEW]$/;
+    static moveTurnRegex = /^[LMR]+$/;
 
     static parseCommand(input:string){
         if (this.createMapRegex.test(input)){
             return new Command(this.commandTypes[0],input.split(" "));
         } else if (this.createRoverRegex.test(input)){
             return new Command(this.commandTypes[1],input.split(" "));
+        } else if (this.moveTurnRegex.test(input)){
+            return new Command(this.commandTypes[2], input.split(""));
         }
         else {
             console.log(input);
-            return new Command(this.commandTypes[4],input.split(" "));
+            return new Command(this.commandTypes[3],input.split(" "));
         }
     }
 
@@ -63,7 +66,7 @@ export class Command{
     }
 
     static getInvalidCommands(commands:Command[]){
-        return commands.filter(this.filterCommandType(Command.commandTypes[4]))
+        return commands.filter(this.filterCommandType(Command.commandTypes[3]))
     }
     
     private commandType:string;
@@ -72,6 +75,10 @@ export class Command{
     constructor(commandType:string, values:string[]){
         this.commandType = commandType
         this.values = values;
+    }
+
+    toString(){
+        return `${this.commandType} - ${this.values}`
     }
 
     getCommandType(){
