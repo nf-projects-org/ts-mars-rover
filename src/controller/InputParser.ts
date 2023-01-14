@@ -1,5 +1,3 @@
-import promptSync from 'prompt-sync';
-const prompt = promptSync();
 import * as fs from 'fs';
 import { Command } from "../model/Command";
 
@@ -35,29 +33,20 @@ export class FileInputParser extends InputParser{
 }
 
 
-export class NodeInputParser extends InputParser{
+// export class NodeInputParser extends InputParser{
 
-    private static prompt = "Enter Input and type #EOF# on a new line to finish";
-    // private static endInput = "#EOF#";
+//     private static prompt = "Enter Input and type #EOF# on a new line to finish";
+//     // private static endInput = "#EOF#";
 
-    private buffer:string[] = [];
+//     private buffer:string[] = [];
     
-    getInput(){
-        console.log(NodeInputParser.prompt);
-        console.log(1);
-        const input =  prompt("Hello");
-        console.log(2);
-        this.buffer.push(input);
-        return this.buffer;
-    }
+//     getInput(){
+//     }
 
-    getCommands(){
-        let input = this.getInput();
-        let commands:Command[] = input.map( line => Command.parseCommand(line));
-        console.log(commands);
-        return commands;
-    }
-}
+//     getCommands():Command[]{
+//         return [new Command()]
+//     }
+// }
 
 export class BrowserInputParser {
 
