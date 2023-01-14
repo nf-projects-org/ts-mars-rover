@@ -1,6 +1,7 @@
 {
   "include": [
-    "./src/**/*","./*"
+    "./src/**/*",
+    "./*"
   ],
   "ts-node": {
     "esm": true,
@@ -29,5 +30,4 @@
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
     "noEmitOnError": true,
   }
-
 }
