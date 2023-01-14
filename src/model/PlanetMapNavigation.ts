@@ -14,18 +14,17 @@ export class RectangularMap extends PlanetMap {
         this.width = width;
     }
 
-    toString(){
+    toString() {
         return `RectangularMap: ${this.width}, ${this.height}`;
     }
 
-    static createMap(x:number, y: number){
-        return new RectangularMap(x,y);
-    }
-    
-    static createMapFromString(x:string, y:string){
-        return this.createMap(parseInt(x), parseInt(y));
+    static createMap(x: number, y: number) {
+        return new RectangularMap(x, y);
     }
 
+    static createMapFromString(x: string, y: string) {
+        return this.createMap(parseInt(x), parseInt(y));
+    }
 
     isPositionInMap(position: Position): boolean {
         return position.getX() >= 0 && position.getX() <= this.width && position.getY() >= 0 && position.getY() <= this.height;
@@ -42,7 +41,7 @@ export class Position {
         this.y = y;
     }
 
-    toString(){
+    toString() {
         return `Position: ${this.x}, ${this.y}`;
     }
 
@@ -53,39 +52,69 @@ export class Position {
         return this.y;
     }
 
-    static createPosition(arr:string[]){
-        if(arr.length!= 2){
-            return new Position(-1,-1);
+    static createPosition(arr: string[]) {
+        if (arr.length != 2) {
+            return new Position(-1, -1);
         }
         return new Position(parseInt(arr[0]), parseInt(arr[1]));
     }
 }
 
 export class CompassHeading {
-    private readonly heading:string;
-    
+    private readonly heading: string;
+
     constructor(heading: string) {
         this.heading = heading;
     }
 
-    getheading(){
+    static NORTH = "N";
+    static SOUTH = "S";
+    static EAST = "E";
+    static WEST = "W";
+
+    static leftMap = new Map([
+        ["N", "W"],
+        ["W", "S"],
+        ["S", "E"],
+        ["E", "N"]
+    ]);
+
+    static rightMap = new Map([
+        ["N", "E"],
+        ["E", "S"],
+        ["S", "W"],
+        ["W", "N"]
+    ]);
+
+
+
+    toString() {
+        return `Heading: ${this.heading}`;
+    }
+    getHeading() {
         return this.heading;
     }
 
-    static createHeading(heading:string){
+    getLeft() {
+        let heading = CompassHeading.leftMap.get(this.heading);
+        if (heading == undefined) {
+            return "ERROR";
+        } else {
+            return heading;
+        }
+    }
+
+    getRight() {
+        let heading = CompassHeading.rightMap.get(this.heading);
+        if (heading == undefined) {
+            return "ERROR";
+        } else {
+            return heading;
+        }
+    }
+
+    static createHeading(heading: string) {
         return new CompassHeading(heading);
     }
 
-}
-
-export class Direction {
-    private readonly direction: String;
-
-    constructor(direction: String) {
-        this.direction = direction;
-    }
-
-    getDirection(){
-        return this.direction;
-    }
 }
