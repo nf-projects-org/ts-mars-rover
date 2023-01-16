@@ -1,6 +1,5 @@
 # Mars Rover ```README.md``` 
 
-``` markdown
 # Mars Rover Challenge 
 Tech Task: Program to move Rovers around the surface of Mars
 
@@ -19,10 +18,9 @@ Implementation of the tech task
 Clone the repository
 
 ## Installing
-npm init -y
+npm install
 
 ## Usage
 Edit the Input.txt file and execute npm run start
 Alternatively edit the tests in MarsRover.test.ts
 
-```
