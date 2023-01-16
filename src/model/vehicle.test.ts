@@ -1,7 +1,6 @@
-import { Command } from "./Command";
-import { CompassHeading, RectangularMap } from "../../src/model/PlanetMapNavigation";
-import { MarsRover } from "./Vehicle";
-import { Position } from "../../src/model/PlanetMapNavigation";
+import { Command } from "./command";
+import { CompassHeading, RectangularMap, Position } from "../../src/model/planet_map_navigation";
+import { MarsRover } from "./vehicle";
 
 
 describe("MarsRover Functionality", () => {

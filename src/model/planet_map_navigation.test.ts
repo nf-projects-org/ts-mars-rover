@@ -1,4 +1,4 @@
-import { RectangularMap, Position } from "../../src/model/PlanetMapNavigation";
+import { RectangularMap, Position } from "../../src/model/planet_map_navigation";
 
 describe("RectangularMap Functionality", () => {
 
