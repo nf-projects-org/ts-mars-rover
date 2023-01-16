@@ -12,7 +12,7 @@ Tech Task: Program to move Rovers around the surface of Mars
 - [Contributing](#contributing)
 
 ## About
-Implementation of the tech task
+Simulation of rovers moving about on Mars with instructions being sent to each rover
 
 ## Getting Started
 Clone the repository
