@@ -1,6 +1,6 @@
-import { Command } from "../../src/model/Command";
+import { Command } from "./Command";
 import { CompassHeading, RectangularMap } from "../../src/model/PlanetMapNavigation";
-import { MarsRover } from "../../src/model/Vehicle";
+import { MarsRover } from "./Vehicle";
 import { Position } from "../../src/model/PlanetMapNavigation";
 
 

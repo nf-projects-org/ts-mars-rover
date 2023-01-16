@@ -1,4 +1,4 @@
-import { Command } from "../../src/model/Command";
+import { Command } from "./Command";
 
 describe("Command Functionality", () => {
 
