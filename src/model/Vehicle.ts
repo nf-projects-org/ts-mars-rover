@@ -1,6 +1,6 @@
-import { Command } from "./Command";
-import { PlanetMap, Position, CompassHeading } from "./PlanetMapNavigation";
-import { Instrument } from "./Instrument";
+import { Command } from "./command";
+import { PlanetMap, Position, CompassHeading } from "./planet_map_navigation";
+import { Instrument } from "./instrument";
 import * as uuid from 'uuid';
 
 

@@ -1,8 +1,8 @@
-import { InputParser } from "./InputParser";
-import { PlanetMap, RectangularMap, Position, CompassHeading } from "../model/PlanetMapNavigation";
-import { Instrument } from "../model/Instrument";
-import { Command } from "../model/Command";
-import { Vehicle, MarsRover } from "../model/Vehicle";
+import { InputParser } from "./input_parser";
+import { PlanetMap, RectangularMap, Position, CompassHeading } from "../model/planet_map_navigation";
+import { Instrument } from "../model/instrument";
+import { Command } from "../model/command";
+import { Vehicle, MarsRover } from "../model/vehicle";
 
 export class MarsStateController {
     static CREATEMAP = Command.commandTypes[0];

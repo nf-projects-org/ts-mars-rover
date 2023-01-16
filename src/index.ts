@@ -1,5 +1,5 @@
-import { InputParser, FileInputParser, BrowserInputParser } from "./controller/InputParser";
-import { MarsStateController } from "./controller/MarsStateController";
+import { InputParser, FileInputParser, BrowserInputParser } from "./controller/input_parser";
+import { MarsStateController } from "./controller/mars_state_controller";
 
 let inputParser: InputParser;
 

@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { Command } from "../model/Command";
+import { Command } from "../model/command";
 
 export abstract class InputParser {
     abstract getCommands(): Command[];

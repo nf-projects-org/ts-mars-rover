@@ -1,4 +1,4 @@
-import { Position } from "./PlanetMapNavigation";
+import { Position } from "./planet_map_navigation";
 export class Command {
     private commandType: string;
     private values: string[];
