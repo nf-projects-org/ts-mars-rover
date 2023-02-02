@@ -1,6 +1,6 @@
 import { Command } from "./command";
 import { PlanetMap, Position, CompassHeading } from "./planet_map_navigation";
-import { Instrument } from "./instrument";
+import { RobotArm, Camera } from "./instrument";
 import * as uuid from 'uuid';
 
 
@@ -66,9 +66,9 @@ export abstract class Vehicle {
 
 export class MarsRover extends Vehicle {
 
-    private readonly instruments: Instrument[];
+    private readonly instruments: Array<Camera|RobotArm>;
 
-    constructor(id: String, map: PlanetMap, currentPosition: Position, heading: CompassHeading, vehicles: Position[], instruments: Instrument[]) {
+    constructor(id: String, map: PlanetMap, currentPosition: Position, heading: CompassHeading, vehicles: Position[], instruments: Array<RobotArm|Camera>) {
         super(id, map, currentPosition, heading, vehicles);
         this.instruments = instruments;
     }
@@ -77,7 +77,7 @@ export class MarsRover extends Vehicle {
         return `Rover:${this.getId()} - ${this.getCurrentPosition()} - ${this.getCurrentHeading()}`;
     }
 
-    static createRover(map: PlanetMap, currentPosition: Position, heading: CompassHeading, vehicles: Position[], instruments: Instrument[]) {
+    static createRover(map: PlanetMap, currentPosition: Position, heading: CompassHeading, vehicles: Position[], instruments: Array<RobotArm|Camera>) {
         const id = uuid.v4();
         return new MarsRover(id, map, currentPosition, heading, vehicles, instruments);
     }
@@ -93,7 +93,7 @@ export class MarsRover extends Vehicle {
     }
 
     private executePath(command: Command) {
-        let cmd = command.getValues();
+        let cmd = command.getCommandParams();
         for (let i = 0; i < cmd.length; i++) {
             if (cmd[i] === "M") {
                 this.move(false);
@@ -109,7 +109,7 @@ export class MarsRover extends Vehicle {
     private calculatePath(command: Command) {
         let roverVirtualPostion = this.getCurrentPosition();
         let roverVirtualHeading = this.getCurrentHeading();
-        let cmd = command.getValues();
+        let cmd = command.getCommandParams();
         for (let i = 0; i < cmd.length; i++) {
             if (cmd[i] === "M") {
                 roverVirtualPostion = this.move(true, roverVirtualPostion, roverVirtualHeading);

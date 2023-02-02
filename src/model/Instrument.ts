@@ -1,8 +1,4 @@
-export abstract class Instrument {
-
-}
-
-export class Camera extends Instrument {
+export class Camera {
     captureImage() {
         return true;
     }
@@ -16,7 +12,7 @@ export class Camera extends Instrument {
     }
 }
 
-export class RobotArm extends Instrument {
+export class RobotArm {
     open() {
         return true;
     }

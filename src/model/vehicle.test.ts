@@ -10,13 +10,13 @@ describe("MarsRover Functionality", () => {
         let position = new Position(1, 2);
         let heading = new CompassHeading("N");
         let rover = MarsRover.createRover(map, position, heading, [], []);
-        let command = new Command(Command.commandTypes[2], "MMM".split(""));
+        let command = new Command("MOVEORTURN", "MMM".split(""));
         expect(rover.moveOrTurn(command)).toBe(true);
         rover = MarsRover.createRover(map, position, heading, [], []);
-        command = new Command(Command.commandTypes[2], "MMMMMM".split(""));
+        command = new Command("MOVEORTURN", "MMMMMM".split(""));
         expect(rover.moveOrTurn(command)).toBe(false);
         rover = MarsRover.createRover(map, position, heading, [], []);
-        command = new Command(Command.commandTypes[2], "LMLMLMLMM".split(""));
+        command = new Command("MOVEORTURN", "LMLMLMLMM".split(""));
         expect(rover.moveOrTurn(command)).toBe(true);
     });
 

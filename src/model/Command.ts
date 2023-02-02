@@ -1,32 +1,28 @@
 import { Position } from "./planet_map_navigation";
+
+const COMMAND_TYPES = ['CREATEMAP', 'CREATEROVER', 'MOVEORTURN', "UNKNOWN"] as const;
+export type CommandType = typeof COMMAND_TYPES[number];
+
 export class Command {
-    private commandType: string;
-    private values: string[];
+    private commandType: CommandType;
+    private commandParameters: string[];
 
-    constructor(commandType: string, values: string[]) {
+    constructor(commandType: CommandType, commandParameters: string[]) {
         this.commandType = commandType
-        this.values = values;
+        this.commandParameters = commandParameters;
     }
 
-    static commandTypes = ['CREATEMAP', 'CREATEROVER', 'MOVETURN', "UNKNOWN"] as const
-    static createMapRegex = /^\d+ \d+$/;
-    static createRoverRegex = /^\d+ \d+ [NSEW]$/;
-    static moveTurnRegex = /^[LMR]+$/;
+    static readonly createMapRegex = /^\d+ \d+$/;
+    static readonly createRoverRegex = /^\d+ \d+ [NSEW]$/;
+    static readonly moveTurnRegex = /^[LMR]+$/;
 
-    static parseCommand(input: string) {
-        if (this.createMapRegex.test(input)) {
-            return new Command(this.commandTypes[0], input.split(" "));
-        } else if (this.createRoverRegex.test(input)) {
-            return new Command(this.commandTypes[1], input.split(" "));
-        } else if (this.moveTurnRegex.test(input)) {
-            return new Command(this.commandTypes[2], input.split(""));
-        }
-        else {
-            console.log(input);
-            return new Command(this.commandTypes[3], input.split(" "));
-        }
-    }
-
+    /**
+     * 
+     * @param input - Lines of input from the user
+     * @returns parsed and validated list of commands or empty list if 
+     * any command could not be validated or parsed
+     * All commands are run or no commands are run
+     */
     static createCommands(input: string[]) {
         let commands = input.map(commandString => this.parseCommand(commandString));
         if (Command.validateCommandList(commands)) {
@@ -36,14 +32,45 @@ export class Command {
         }
     }
 
+
+    /**
+     * 
+     * @param input 
+     * @returns Command object corresponding to input or Unknown Command for unrecognized input
+     */
+    static parseCommand(input: string) {
+        if (this.createMapRegex.test(input)) {
+            return new Command("CREATEMAP", input.split(" "));
+        } else if (this.createRoverRegex.test(input)) {
+            return new Command("CREATEROVER", input.split(" "));
+        } else if (this.moveTurnRegex.test(input)) {
+            return new Command("MOVEORTURN", input.split(""));
+        }
+        else {
+            console.log(input);
+            return new Command("UNKNOWN", input.split(" "));
+        }
+    }
+
+
+    /**
+     * 
+     * @param commands 
+     * @returns true if the commands are all valid
+     * No invalid commands
+     * Single Create map
+     * At least one Rover created
+     * Rovers at separate positions and not on top of each other
+     * Every Rover has one MOVEORTURN command
+     */
     static validateCommandList(commands: Command[]) {
         if (commands.length == 0) {
             return false;
         }
-        let invalidCommands = this.getInvalidCommands(commands);
-        let createMapCommands = this.getCreateMapCommands(commands);
-        let createRoverCommands = this.getCreateRoverCommands(commands);
-        let moveTurnCommands = this.getMoveTurnRoverCommands(commands);
+        let invalidCommands = commands.filter(this.filterCommandType("UNKNOWN"));
+        let createMapCommands = commands.filter(this.filterCommandType("CREATEMAP"));
+        let createRoverCommands = commands.filter(this.filterCommandType("CREATEROVER"))
+        let moveTurnCommands = commands.filter(this.filterCommandType("MOVEORTURN"));
 
         if (invalidCommands.length > 0) {
             console.log("Invalid commands found. Terminating");
@@ -52,7 +79,7 @@ export class Command {
         }
 
         let roverPositions = createRoverCommands.map(command => {
-            let [xString, yString] = command.getValues();
+            let [xString, yString] = command.commandParameters;
             let roverPostion = Position.createPosition([xString, yString]);
             return roverPostion
         });
@@ -65,7 +92,7 @@ export class Command {
             }
         }
 
-        if (commands[0].getCommandType() !== Command.commandTypes[0]) {
+        if (commands[0].commandType !== "CREATEMAP") {
             console.log("First Command must be the Create Map. Terminating");
             return false;
         }
@@ -87,35 +114,19 @@ export class Command {
         return true;
     }
 
-    static filterCommandType = (type: string) => (command: Command) => command.getCommandType() === type;
+    static filterCommandType = (type: CommandType) => (command: Command) => command.commandType === type;
 
-    static getCreateRoverCommands(commands: Command[]) {
-        return commands.filter(this.filterCommandType(Command.commandTypes[1]))
-    }
-
-    static getMoveTurnRoverCommands(commands: Command[]) {
-        return commands.filter(this.filterCommandType(Command.commandTypes[2]));
-    }
-
-    static getCreateMapCommands(commands: Command[]) {
-        return commands.filter(this.filterCommandType(Command.commandTypes[0]));
-    }
-
-    static getInvalidCommands(commands: Command[]) {
-        return commands.filter(this.filterCommandType(Command.commandTypes[3]))
-    }
-
-
+  
     toString() {
-        return `${this.commandType} - ${this.values}`
+        return `${this.commandType} - ${this.commandParameters}`
     }
 
-    getCommandType() {
+    getCommandType(){
         return this.commandType;
     }
 
-    getValues() {
-        return this.values;
+    getCommandParams(){
+        return this.commandParameters;
     }
-
+   
 }
